@@ -1,0 +1,84 @@
+!MaterialAsset
+Id: 59b179ff-a998-4224-9981-60d2f6e499ed
+SerializedVersion: {Stride: 2.0.0.0}
+Tags: []
+Attributes:
+    Displacement: !StrideShaderDemo.Rendering.MaterialWaveDisplacementFeature,StrideShaderDemo
+        Waves:
+            3b8f35daf5640db8f8589dbc1f879283: !StrideShaderDemo.Rendering.DisplacementParameters.GerstnerWave,StrideShaderDemo
+                IsEnabled: true
+                WaveLength: 10.0
+                WaveDirection: {X: 1.0, Y: 0.0, Z: 0.3}
+                WaveSpeedScale: 1.0
+                WaveHeight: 0.545
+                WaveSteepness: 0.45
+            20498231a7ba2b522fd05e9697f8cd78: !StrideShaderDemo.Rendering.DisplacementParameters.GerstnerWave,StrideShaderDemo
+                IsEnabled: true
+                WaveLength: 13.0
+                WaveDirection: {X: -0.2, Y: 0.0, Z: 0.7}
+                WaveSpeedScale: 1.0
+                WaveHeight: 0.335
+                WaveSteepness: 0.48
+            aa837a4d1866e0a77a9a10c3a122d18f: !StrideShaderDemo.Rendering.DisplacementParameters.GerstnerWave,StrideShaderDemo
+                IsEnabled: true
+                WaveLength: 22.0
+                WaveDirection: {X: -0.5, Y: 0.0, Z: -0.5}
+                WaveSpeedScale: 1.0
+                WaveHeight: 0.567
+                WaveSteepness: 0.35
+    Surface: !StrideShaderDemo.Rendering.MaterialWaveSurfaceNormalFeature,StrideShaderDemo
+        NormalMap: e4539b63-6ec8-4fec-bdcd-ada6e83d2d99:Water/WaterNormalMap
+        Normals:
+            bfff0b052a76b03a33c60eca93a72f83:
+                IsEnabled: true
+                NormalMapStrength: 0.63
+                NormalMapWorldLength: 9.0
+                PanDirection: {X: 1.0, Y: 0.3}
+                PanSpeed: 0.16
+            0eabea656b49c85a979052cd532e06ea:
+                IsEnabled: true
+                NormalMapStrength: 0.75
+                NormalMapWorldLength: 7.0
+                PanDirection: {X: -0.5, Y: 0.5}
+                PanSpeed: 0.23
+            bd08d951c82560fb14a476d32380bb20:
+                IsEnabled: true
+                NormalMapStrength: 0.65
+                NormalMapWorldLength: 8.0
+                PanDirection: {X: -0.25, Y: -1.0}
+                PanSpeed: 0.34
+    MicroSurface: !MaterialGlossinessMapFeature
+        GlossinessMap: !ComputeFloat
+            Value: 0.73
+    Diffuse: !MaterialDiffuseMapFeature
+        DiffuseMap: !ComputeColor
+            Value: {R: 1.0, G: 1.0, B: 1.0, A: 1.0}
+    DiffuseModel: !MaterialDiffuseLambertModelFeature {}
+    Specular: !MaterialMetalnessMapFeature
+        MetalnessMap: !ComputeFloat
+            Value: 0.8
+    SpecularModel: !MaterialSpecularMicrofacetModelFeature
+        Fresnel: !MaterialSpecularMicrofacetFresnelSchlick {}
+        Visibility: !MaterialSpecularMicrofacetVisibilitySmithSchlickGGX {}
+        NormalDistribution: !MaterialSpecularMicrofacetNormalDistributionGGX {}
+        Environment: !MaterialSpecularMicrofacetEnvironmentGGXLUT {}
+    Transparency: !StrideShaderDemo.Rendering.MaterialWaterColorFeature,StrideShaderDemo
+        Alpha: !ComputeFloat
+            Value: 1.0
+        Tint: !ComputeShaderClassColor
+            MixinReference: WaterColorTransparency
+            Generics: {}
+            CompositionNodes: {}
+        DitheredShadows: true
+        WaterColor: {R: 0.38085938, G: 0.55934685, B: 0.78125}
+        FresnelColor: {R: 1.0, G: 0.31875002, B: 0.8535308}
+        BeersLawFactor: 0.15
+        DepthOffset: 0.5
+        IsWaterDistortionEnabled: true
+        WaterDistortionScale: 0.25
+        IsWaterEdgeEnabled: true
+        WaterEdgeColor: {R: 1.0, G: 1.0, B: 1.0}
+        WaterEdgeDepthDiffThreshold: 0.1
+    Overrides:
+        UVScale: {X: 1.0, Y: 1.0}
+Layers: {}

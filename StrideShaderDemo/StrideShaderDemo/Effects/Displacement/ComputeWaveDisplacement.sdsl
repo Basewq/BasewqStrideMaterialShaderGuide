@@ -1,0 +1,14 @@
+﻿shader ComputeWaveDisplacement
+{
+    // Output fields
+    stage stream bool WaveDisplacementIsEnabled;
+    stage stream float WaveDisplacementAmplitude;
+    stage stream float3 WaveDisplacementPositionOffset;
+    stage stream float3 WaveDisplacementNormal;
+    stage stream float3 WaveDisplacementTangent;
+
+    void ComputeDisplacement(float3 worldPosition)
+    {
+        streams.WaveDisplacementIsEnabled = false;
+    }
+};

@@ -1,0 +1,4 @@
+﻿shader MyGameGlobalData
+{
+    stage static float Gravity = 9.8067f;
+};

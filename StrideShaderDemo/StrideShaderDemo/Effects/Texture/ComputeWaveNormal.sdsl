@@ -1,0 +1,12 @@
+﻿shader ComputeWaveNormal
+{
+    // Output fields
+    stage stream bool WaveNormalIsEnabled;
+    stage stream float WaveNormalStrength;
+    stage stream float3 WaveNormalNormal;
+
+    void ComputeNormal(float3 worldPosition)
+    {
+        streams.WaveNormalIsEnabled = false;
+    }
+};

@@ -1,0 +1,29 @@
+﻿shader MaterialWaveSurfaceNormal : ComputeWaveNormal, IMaterialSurfacePixel,
+    PositionStream4, NormalStream, Transformation
+{
+    compose ComputeWaveNormal SurfaceNormalFunctions[];
+
+    override void Compute()
+    {
+        var worldPos = streams.PositionWS;
+
+        bool finalIsEnabled = false;
+        float3 finalWaveNormal = 0;
+
+        foreach (var surfNormFunc in SurfaceNormalFunctions)
+        {
+            surfNormFunc.ComputeNormal(worldPos.xyz);
+            if (streams.WaveNormalIsEnabled)
+            {
+                finalIsEnabled = true;
+                finalWaveNormal += MyUtils.ReconstructNormalFromXY(streams.WaveNormalNormal, streams.WaveNormalStrength);
+            }
+        }
+
+        if (finalIsEnabled)
+        {
+            // Don't need to normalize streams.matNormal here, it gets normalized when streams.normalWS is calculated
+            streams.matNormal = finalWaveNormal;
+        }
+    }
+};

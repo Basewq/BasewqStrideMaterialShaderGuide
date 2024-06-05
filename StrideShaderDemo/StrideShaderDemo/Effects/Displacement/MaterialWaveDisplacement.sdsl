@@ -1,0 +1,38 @@
+﻿shader MaterialWaveDisplacement : ComputeWaveDisplacement, IMaterialSurface,
+    PositionStream4, NormalStream, Transformation
+{
+    compose ComputeWaveDisplacement DisplacementFunctions[];
+
+    override void Compute()
+    {
+        float3 worldPos = mul(streams.Position, World).xyz;
+
+        bool finalIsEnabled = false;
+        float3 finalPositionOffset = 0;
+        float3 finalWaveNormal = 0;
+        float3 finalWaveTangent = 0;
+
+        foreach (var dispFunc in DisplacementFunctions)
+        {
+            dispFunc.ComputeDisplacement(worldPos);
+            if (streams.WaveDisplacementIsEnabled)
+            {
+                finalIsEnabled = true;
+                finalPositionOffset += streams.WaveDisplacementPositionOffset;
+                float vectorWeight = streams.WaveDisplacementAmplitude;
+                finalWaveNormal += streams.WaveDisplacementNormal * vectorWeight;
+                finalWaveTangent += streams.WaveDisplacementTangent * vectorWeight;
+            }
+        }
+
+        if (finalIsEnabled)
+        {
+            finalWaveNormal = normalize(finalWaveNormal);
+            finalWaveTangent = normalize(finalWaveTangent);
+
+            streams.Position.xyz += finalPositionOffset;
+            streams.meshNormal = finalWaveNormal;
+            streams.meshTangent = float4(finalWaveTangent, 0);
+        }
+    }
+};

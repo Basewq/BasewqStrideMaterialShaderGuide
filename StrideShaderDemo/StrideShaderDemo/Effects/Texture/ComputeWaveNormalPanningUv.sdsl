@@ -1,0 +1,30 @@
+﻿shader ComputeWaveNormalPanningUv<
+    bool IsEnabled,
+    float NormalMapStrength,
+    float NormalMapWorldLength,
+    float2 PanDirection,
+    float PanSpeed
+    > : ComputeWaveNormal, Texturing
+{
+    rgroup PerMaterial
+    {
+        stage Texture2D NormalMap;
+    }
+
+    override void ComputeNormal(float3 worldPosition)
+    {
+        streams.WaveNormalIsEnabled = IsEnabled;
+        if (!IsEnabled)
+        {
+            return;
+        }
+
+        float2 uvOffsetDir = normalize(PanDirection);
+        float uvPanSpeed = PanSpeed / NormalMapWorldLength;
+        float2 uv = MyUtils.GetPanningTextureMapUv(worldPosition, NormalMapWorldLength, uvOffsetDir, uvPanSpeed);
+        float4 tex = NormalMap.Sample(PointRepeatSampler, uv);
+                
+        streams.WaveNormalStrength = NormalMapStrength;
+        streams.WaveNormalNormal = tex.xyz;
+    }
+};

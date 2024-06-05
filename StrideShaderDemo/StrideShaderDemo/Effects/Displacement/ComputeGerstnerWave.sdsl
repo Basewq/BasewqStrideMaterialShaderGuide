@@ -1,0 +1,72 @@
+﻿shader ComputeGerstnerWave<
+    bool IsEnabled,
+    float WaveLength,
+    float3 WaveDirection,
+    float WaveSpeedScale,
+    float WaveHeight,       // Height is max peak to min peak vertical distance
+    float WaveSteepness
+    > : ComputeWaveDisplacement, MyGameGlobalData
+{
+    override void ComputeDisplacement(float3 worldPosition)
+    {
+        streams.WaveDisplacementIsEnabled = IsEnabled;
+        if (!IsEnabled)
+        {
+            return;
+        }
+
+        // Equations based off https://developer.nvidia.com/gpugems/gpugems/part-i-natural-effects/chapter-1-effective-water-simulation-physical-models
+        // The only notable change is using "frequency = 2 * Pi / L" instead of the stated "frequency = 2 / L" which appears to be a typo in the article
+
+        float3 waveDir = normalize(float3(WaveDirection.x, 0, WaveDirection.z));
+        // Equation 13
+        float frequency = 2 * Math.PI / WaveLength;
+        float timePhaseOffset = frequency * sqrt(Gravity / frequency) * Global.Time * WaveSpeedScale;
+
+        // Equation 1
+        float positionPhaseOffset = dot(waveDir.xz, worldPosition.xz) * frequency;
+
+        float wavePositionPhase = positionPhaseOffset - timePhaseOffset;    // Subtract timePhaseOffset so it moves in the correct direction
+        float posCosValue = cos(wavePositionPhase);
+
+        float waveAmplitude = 0.5 * WaveHeight;     
+        float waveHeight_x_Frequency = waveAmplitude * frequency;
+        float steepnessMultiplier = WaveSteepness / frequency;
+        float posSinValue = sin(wavePositionPhase);
+
+        float3 xzOffset = steepnessMultiplier * waveDir * posCosValue;        
+        float currentWaveHeight = posSinValue * waveAmplitude;
+        float3 posOffset = float3(xzOffset.x, currentWaveHeight, xzOffset.z);
+        // Equation 9
+        float3 wavePosition = worldPosition + posOffset;
+
+        float normalPhaseOffset = frequency * dot(waveDir.xz, wavePosition.xz);
+        float waveNormalPhase = normalPhaseOffset - timePhaseOffset;
+        float normCosValue = cos(waveNormalPhase);
+        float normSinValue = sin(waveNormalPhase);
+
+        float cosWaveMultiplier = waveHeight_x_Frequency * normCosValue;
+        float sinWaveMultiplier = waveHeight_x_Frequency * normSinValue;
+
+        // Equation 11
+        float3 tangent = float3(
+            -steepnessMultiplier * waveDir.x * waveDir.z * sinWaveMultiplier,
+            waveDir.z * cosWaveMultiplier,
+            1 - (steepnessMultiplier * waveDir.z * waveDir.z * sinWaveMultiplier)
+        );
+        //tangent = normalize(tangent);
+
+        // Equation 12
+        float3 normal = float3(
+            -waveDir.x * cosWaveMultiplier, 
+            1 - (steepnessMultiplier * sinWaveMultiplier),
+            -waveDir.z * cosWaveMultiplier
+        );
+        //normal = normalize(normal);
+
+        streams.WaveDisplacementAmplitude = WaveHeight;
+        streams.WaveDisplacementPositionOffset = posOffset;
+        streams.WaveDisplacementNormal = normal;
+        streams.WaveDisplacementTangent = tangent;
+    }
+};

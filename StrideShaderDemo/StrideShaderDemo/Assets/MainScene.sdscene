@@ -1,0 +1,255 @@
+!SceneAsset
+Id: 5eba4b6e-d611-48f1-a41d-1bc5990c9cd1
+SerializedVersion: {Stride: 3.1.0.1}
+Tags: []
+ChildrenIds: []
+Offset: {X: 0.0, Y: 0.0, Z: 0.0}
+Hierarchy:
+    RootParts:
+        - ref!! e99bd947-06df-4716-ac74-211295ca306f
+        - ref!! 393bebc1-2a3e-4d1c-9895-bff1932575d7
+        - ref!! e9621103-2c29-4540-86ce-de69ccea4388
+        - ref!! cc701812-fe26-4398-a46c-617615e76ec5
+        - ref!! 21e45206-d1ea-45d2-a667-ee2af9f24e92
+        - ref!! 397a2e76-fd1f-4786-b1c4-5d9c60eac5b5
+        - ref!! 7b61612b-ebc4-409c-a8c4-b6d14a308e1b
+        - ref!! 2194539e-15fa-4093-9402-93dc84632223
+        - ref!! 14eab2af-19b1-4324-ab57-89a1f3cd4c4b
+        - ref!! a57a8031-9263-4c6b-a97c-25696d96bd1f
+        - ref!! af3cd0c6-5404-4f07-bceb-158abbb761a0
+        - ref!! 05369439-9e14-43c0-ae81-d9f5829f8adb
+        - ref!! c46393dc-087d-44c5-b25f-2b40935d2351
+        - ref!! 93698f68-0be7-4532-a478-48d8fe08e774
+    Parts:
+        -   Folder: EnvironmentObjects
+            Entity:
+                Id: 05369439-9e14-43c0-ae81-d9f5829f8adb
+                Name: Cube
+                Components:
+                    041d3cee61f6c39caa162825f116b20b: !TransformComponent
+                        Id: eb46b23c-6361-4f31-8286-08acdf983d49
+                        Position: {X: -6.5, Y: 3.0, Z: -4.5}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 2.0, Y: 4.5, Z: 0.5}
+                        Children: {}
+                    4a959e4cb7c41c16aec445822758a61c: !ModelComponent
+                        Id: fcdceeca-e5b2-4aea-be0f-b6943e257ecf
+                        Model: 3a882841-a00a-4139-bf97-bd81feff730e:Cube
+                        Materials:
+                            650992daedba9bacbda98dc8693f62be~0: 5d83a053-65e4-4330-a8c7-7679e9f2e45c:Block Material
+        -   Folder: EnvironmentObjects
+            Entity:
+                Id: 14eab2af-19b1-4324-ab57-89a1f3cd4c4b
+                Name: Cube
+                Components:
+                    041d3cee61f6c39caa162825f116b20b: !TransformComponent
+                        Id: 1c79b91a-c41b-4ca4-bc28-89137c9a7491
+                        Position: {X: 0.0, Y: -1.0, Z: 2.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    4a959e4cb7c41c16aec445822758a61c: !ModelComponent
+                        Id: bd530fd5-1f9a-4276-995b-b32ab70a720b
+                        Model: 30ea7f91-b641-44b5-90fd-04dd12252af1:Cube2
+                        Materials: {}
+        -   Folder: EnvironmentObjects
+            Entity:
+                Id: 2194539e-15fa-4093-9402-93dc84632223
+                Name: Cube
+                Components:
+                    041d3cee61f6c39caa162825f116b20b: !TransformComponent
+                        Id: 9d3d667b-e0fe-49d8-990f-e79fd1c20575
+                        Position: {X: 0.0, Y: -1.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    4a959e4cb7c41c16aec445822758a61c: !ModelComponent
+                        Id: adfccbf6-e280-4515-9999-bbe7182c353d
+                        Model: 3a882841-a00a-4139-bf97-bd81feff730e:Cube
+                        Materials: {}
+        -   Folder: null
+            Entity:
+                Id: 21e45206-d1ea-45d2-a667-ee2af9f24e92
+                Name: Ground
+                Components:
+                    c102ae96f119746e0c8e87f7c477beae: !TransformComponent
+                        Id: 10553ebc-cab9-48d8-b509-225eff46c0e4
+                        Position: {X: 0.0, Y: -5.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 10.0, Y: 1.0, Z: 10.0}
+                        Children: {}
+                    8eacd59575a529b09ffafb54d390db70: !ModelComponent
+                        Id: 47cc8c11-12df-4712-9fbe-5e7022b738b4
+                        Model: 7f9d0fab-c08d-44e4-adf0-fc5d28fcbe31:Ground
+                        Materials: {}
+        -   Entity:
+                Id: 393bebc1-2a3e-4d1c-9895-bff1932575d7
+                Name: Directional light
+                Components:
+                    ca92998ad0c5f7e24bd4d73982271f0a: !TransformComponent
+                        Id: 2f8124bf-5c7c-470e-8a69-8154fdaf4012
+                        Position: {X: 0.0, Y: 2.0, Z: 0.0}
+                        Rotation: {X: -0.07782839, Y: 0.9212198, Z: 0.29045948, W: 0.24684013}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    bf91d6141c63a964cd288a00293115ae: !LightComponent
+                        Id: 87454350-f924-4225-8bf8-bb9a084faa7b
+                        Type: !LightDirectional
+                            Color: !ColorRgbProvider
+                                Value: {R: 1.0, G: 1.0, B: 1.0}
+                            Shadow:
+                                Enabled: true
+                                Filter: !LightShadowMapFilterTypePcf
+                                    FilterSize: Filter5x5
+                                Size: Large
+                                DepthRange: {}
+                                PartitionMode: !LightDirectionalShadowMap.PartitionLogarithmic {}
+                                ComputeTransmittance: false
+                                BiasParameters: {}
+                        Intensity: 2.0
+        -   Folder: EnvironmentObjects
+            Entity:
+                Id: 397a2e76-fd1f-4786-b1c4-5d9c60eac5b5
+                Name: Sphere
+                Components:
+                    774809a35e3c163b8c8da7af8eefa4cf: !TransformComponent
+                        Id: a2a209f5-150e-4a5d-a4ce-23e8a1a9b436
+                        Position: {X: 0.0, Y: 0.5, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    de6fe607b23622cced90b964ce9e5b09: !ModelComponent
+                        Id: 20ac601b-68e6-4574-86a0-03a48e1386a4
+                        Model: 4692bed5-ed9f-4647-bf63-1fb4fe155b0f:Sphere
+                        Materials: {}
+        -   Folder: EnvironmentObjects
+            Entity:
+                Id: 7b61612b-ebc4-409c-a8c4-b6d14a308e1b
+                Name: Sphere
+                Components:
+                    774809a35e3c163b8c8da7af8eefa4cf: !TransformComponent
+                        Id: 59ce85bb-159a-4800-b113-cf4f712977cf
+                        Position: {X: -4.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 2.0, Y: 2.0, Z: 2.0}
+                        Children: {}
+                    de6fe607b23622cced90b964ce9e5b09: !ModelComponent
+                        Id: 93f91dc0-0e8f-4328-9f6b-5aac3e3ddf62
+                        Model: 4692bed5-ed9f-4647-bf63-1fb4fe155b0f:Sphere
+                        Materials: {}
+        -   Folder: EnvironmentObjects
+            Entity:
+                Id: 93698f68-0be7-4532-a478-48d8fe08e774
+                Name: Cube
+                Components:
+                    041d3cee61f6c39caa162825f116b20b: !TransformComponent
+                        Id: 2d605380-fbfe-4702-a9f3-e5a7324c2bc5
+                        Position: {X: 5.0, Y: 0.0, Z: 49.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 10.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    4a959e4cb7c41c16aec445822758a61c: !ModelComponent
+                        Id: 7dc4a1ec-6fe6-4da7-8c68-c4f8dd4ec7a5
+                        Model: 3a882841-a00a-4139-bf97-bd81feff730e:Cube
+                        Materials: {}
+        -   Folder: EnvironmentObjects
+            Entity:
+                Id: a57a8031-9263-4c6b-a97c-25696d96bd1f
+                Name: Cube
+                Components:
+                    041d3cee61f6c39caa162825f116b20b: !TransformComponent
+                        Id: dbc4da4c-4991-47be-be8e-dda3ecef5300
+                        Position: {X: 0.0, Y: -3.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    4a959e4cb7c41c16aec445822758a61c: !ModelComponent
+                        Id: 36e606b7-cc48-45a0-86d6-69e6cc0c0d42
+                        Model: 3a882841-a00a-4139-bf97-bd81feff730e:Cube
+                        Materials: {}
+        -   Folder: EnvironmentObjects
+            Entity:
+                Id: af3cd0c6-5404-4f07-bceb-158abbb761a0
+                Name: Cube
+                Components:
+                    041d3cee61f6c39caa162825f116b20b: !TransformComponent
+                        Id: e3adae61-d85a-4b2f-920f-82f4c1fef4fe
+                        Position: {X: 0.0, Y: -5.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    4a959e4cb7c41c16aec445822758a61c: !ModelComponent
+                        Id: 2b5cc708-a59a-45c8-888d-a13ac4d32a98
+                        Model: 3a882841-a00a-4139-bf97-bd81feff730e:Cube
+                        Materials: {}
+        -   Folder: EnvironmentObjects
+            Entity:
+                Id: c46393dc-087d-44c5-b25f-2b40935d2351
+                Name: Cube
+                Components:
+                    041d3cee61f6c39caa162825f116b20b: !TransformComponent
+                        Id: b1ccc766-8d79-4aa8-b2d0-0ef6d887e396
+                        Position: {X: 3.5, Y: 3.9999995, Z: 1.5}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 0.5, Y: 20.0, Z: 0.5}
+                        Children: {}
+                    4a959e4cb7c41c16aec445822758a61c: !ModelComponent
+                        Id: 1f21ea61-8334-4e2b-8ff7-494dfddf0863
+                        Model: 3a882841-a00a-4139-bf97-bd81feff730e:Cube
+                        Materials: {}
+        -   Entity:
+                Id: cc701812-fe26-4398-a46c-617615e76ec5
+                Name: Water
+                Components:
+                    3e218e33fed7b8cf267b20a63c6b7324: !TransformComponent
+                        Id: 6a797511-f6a3-445b-8bcb-19cf552dbb78
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    5da45464c21636d8e09786b0ada54be7: !ModelComponent
+                        Id: 040006a4-655e-44cc-ab64-6014fbac6cc7
+                        Model: ec635fa8-198c-484e-8cb0-7ecaac2b9c30:Water/WaterModel
+                        IsShadowCaster: false
+                        Materials: {}
+        -   Entity:
+                Id: e9621103-2c29-4540-86ce-de69ccea4388
+                Name: Skybox
+                Components:
+                    45684a59ed3300bed6a06d71231f1ca8: !TransformComponent
+                        Id: e359f32a-1a55-4509-ab5f-5905250fb2a0
+                        Position: {X: 0.0, Y: 2.0, Z: -2.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    a38d950a7ee3edb5874ea61b95d12ed8: !BackgroundComponent
+                        Id: e64f5a31-9c59-4c9a-ad81-2d3be23875fb
+                        Texture: 5d9575b3-003e-4637-be4e-61ba73b13cab:Skybox texture
+                    7885b26606c3fd31e6f87ec92821361e: !LightComponent
+                        Id: 92ba75ab-ed65-49f5-aac2-8523c6d35ef8
+                        Type: !LightSkybox
+                            Skybox: a4a2d756-3554-479a-a7a3-61e9681b0e3e:Skybox
+        -   Entity:
+                Id: e99bd947-06df-4716-ac74-211295ca306f
+                Name: Camera
+                Components:
+                    0086e77a80c67c9b79f2103f2f8cb83a: !TransformComponent
+                        Id: a55d88cc-2466-4587-9a7b-56e2d9f36771
+                        Position: {X: -2.3999996, Y: 7.5999994, Z: 17.0}
+                        Rotation: {X: -0.25881904, Y: 0.0, Z: 0.0, W: 0.9659258}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    5fb1604451bf1fc85852418961fce7a7: !CameraComponent
+                        Id: 333e23ce-bc67-4452-ab2f-96e4291ed140
+                        Name: null
+                        Projection: Perspective
+                        Slot: ed2cd19b-e75f-4aa3-a630-44de623f1620
+                    f57a37c8d390a6756a1688e6ab619eeb: !StrideShaderDemo.BasicCameraController,StrideShaderDemo
+                        Id: 397dabc8-8e4c-412b-83b5-64b5b726d54b
+                        Gamepad: false
+                        KeyboardMovementSpeed: {X: 5.0, Y: 5.0, Z: 5.0}
+                        TouchMovementSpeed: {X: 0.7, Y: 0.7, Z: 0.3}
+                        SpeedFactor: 5.0
+                        KeyboardRotationSpeed: {X: 3.0, Y: 3.0}
+                        MouseRotationSpeed: {X: 1.0, Y: 1.0}
+                        TouchRotationSpeed: {X: 1.0, Y: 0.7}

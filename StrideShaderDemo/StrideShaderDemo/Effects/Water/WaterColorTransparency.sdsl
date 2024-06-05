@@ -1,0 +1,93 @@
+﻿shader WaterColorTransparency : ComputeColor, Texturing,
+    Transformation, PositionStream4, ShaderBaseStream, NormalStream, MaterialPixelStream,
+    DepthBase, OpaqueBase
+{
+    cbuffer PerMaterial
+    {
+        // Set these as Material keys to also allow modification at run-time if desired
+        [Color] stage float3 WaterColor = float3(1.0f, 1.0f, 1.0f);
+        [Color] stage float3 FresnelColor = float3(1.0f, 1.0f, 1.0f);
+
+        stage float BeersLawFactor = 0.15f;         // Higher value = more opaque in deeper water
+        stage float DepthOffset = 0.05f;            // Offset for when the 'opaque' transition begins
+
+        stage bool IsWaterDistortionEnabled = true;
+        stage float WaterDistortionScale = 1.0f;
+
+        stage bool IsWaterEdgeEnabled = true;
+        [Color] stage float3 WaterEdgeColor = float3(1.0f, 1.0f, 1.0f);
+        stage float WaterEdgeDepthDiffThreshold = 0.1f;
+    }
+
+    float GetFresnelStrength(float3 normalVec, float3 viewVec, float power)
+    {
+        float normalDotView = dot(normalize(normalVec), normalize(viewVec));
+        return pow((1.0 - saturate(normalDotView)), power);
+    }
+
+    override float4 Compute()
+    {
+        // ShadingPosition is the screen space. [This is declared in ShaderBaseStream shader]
+        // (0, 0) is the top left corner on the screen. x goes right, y goes down.
+        float2 screenPos = streams.ShadingPosition.xy;
+        float2 actualScreenSpaceUv = screenPos / ViewSize;     // Gets UV in [0...1] range.
+        float screenAspectRatio = AspectRatio;
+
+        float4 vertModelSpacePos = streams.Position;
+        float4 waterPositionInViewSpace = mul(vertModelSpacePos, WorldView);
+
+        float actualDepthValue = ComputeDepthFromUV(actualScreenSpaceUv);       // Depth value is the *ray* distance (in game units from camera to point) - this is not quite the same as the z distance
+        float waterToActualDepthPointDepthValue = streams.DepthVS - actualDepthValue;   // Negative = depth point is below the water surface
+
+        float2 perceivedScreenSpaceUv = actualScreenSpaceUv;       
+        float perceivedDepthValue = actualDepthValue;
+        float waterToPerceivedDepthPointDepthValue = waterToActualDepthPointDepthValue;
+        if (IsWaterDistortionEnabled)
+        {
+            // Alternative to proper refraction, we just distort the object below the water surface
+            float normalOffsetStrength = 0.08 * WaterDistortionScale;
+            normalOffsetStrength *= saturate(1.0 - (length(waterPositionInViewSpace) / 100));   // Distort less the further away the camera is from the water
+            perceivedScreenSpaceUv.x += streams.matNormal.x * normalOffsetStrength;
+            perceivedScreenSpaceUv.y += streams.matNormal.y * normalOffsetStrength * screenAspectRatio;
+        
+            perceivedDepthValue = ComputeDepthFromUV(perceivedScreenSpaceUv);
+            waterToPerceivedDepthPointDepthValue = streams.DepthVS - perceivedDepthValue;
+
+            // Special case: if the perceived point is *above* the water surface (eg. some object above/sticking out of the water)
+            // we can't tell what's under the water, so just undo the distortion
+            if (perceivedDepthValue < streams.DepthVS)
+            {
+                perceivedDepthValue = actualDepthValue;
+                waterToPerceivedDepthPointDepthValue = waterToActualDepthPointDepthValue;
+                perceivedScreenSpaceUv = actualScreenSpaceUv;
+            }
+        }
+
+        float lightTravelDistance = -waterToPerceivedDepthPointDepthValue - DepthOffset;
+        float depthBlend = exp(-BeersLawFactor * lightTravelDistance);   // exp(-ve value) returns value in range (0...1]
+        depthBlend = saturate(1.0 - depthBlend);     // Remap so 0 = water->depth point on the same position, 1 = large distance between them
+        float depthBlendPower = pow(depthBlend, 2.5);
+
+        float3 opaqueColor3 = GetOpaqueColor(perceivedScreenSpaceUv);
+
+        const float MinDepthColorStrength = 0.0;
+        const float MaxDepthColorStrength = 1.0;
+        const float DepthColorStrengthRange = MaxDepthColorStrength - MinDepthColorStrength;
+        float opaqueDepthBlendStrength = (depthBlendPower * DepthColorStrengthRange) + MinDepthColorStrength;   // Convert range [0, 1] to [MinDepthColorStrength, MaxDepthColorStrength]
+        float3 depthBlendColor3 = lerp(opaqueColor3, WaterColor, opaqueDepthBlendStrength);
+
+        float3 normalVec = mul(streams.meshNormal, (float3x3)World);
+        float3 viewVec = (Eye - streams.PositionWS).xyz;
+        float fresnelStrength = GetFresnelStrength(normalVec, viewVec, 10.0);
+
+        float3 surfaceColor3 = lerp(WaterColor, FresnelColor, fresnelStrength);
+        float3 finalColor3 = lerp(depthBlendColor3, surfaceColor3, depthBlendPower);
+
+        if (IsWaterEdgeEnabled && WaterEdgeDepthDiffThreshold > -waterToActualDepthPointDepthValue)
+        {
+            finalColor3 =  lerp(WaterEdgeColor, finalColor3, 0.1);
+        }
+
+        return float4(finalColor3, 1.0);   // Always treat as 'opaque' since we've already handled the 'transparency' above
+    }
+};

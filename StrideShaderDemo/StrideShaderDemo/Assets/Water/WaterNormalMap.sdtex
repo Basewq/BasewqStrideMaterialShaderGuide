@@ -1,0 +1,6 @@
+!Texture
+Id: e4539b63-6ec8-4fec-bdcd-ada6e83d2d99
+SerializedVersion: {Stride: 2.0.0.0}
+Tags: []
+Source: !file ../../Resources/WaterTextures/WaterNormalMap1.png
+Type: !NormalMapTextureType {}

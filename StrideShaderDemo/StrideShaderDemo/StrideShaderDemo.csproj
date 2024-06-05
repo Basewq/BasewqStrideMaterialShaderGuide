@@ -1,0 +1,90 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net8.0-windows</TargetFrameworks>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Stride.Engine" Version="4.2.0.2188" />
+    <PackageReference Include="Stride.Video" Version="4.2.0.2188" />
+    <PackageReference Include="Stride.Physics" Version="4.2.0.2188" />
+    <PackageReference Include="Stride.Navigation" Version="4.2.0.2188" />
+    <PackageReference Include="Stride.Particles" Version="4.2.0.2188" />
+    <PackageReference Include="Stride.UI" Version="4.2.0.2188" />
+    <PackageReference Include="Stride.Core.Assets.CompilerApp" Version="4.2.0.2188" IncludeAssets="build;buildTransitive" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Effects\Displacement\ComputeGerstnerWave.sdsl.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Effects\Displacement\ComputeWaveDisplacement.sdsl.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Effects\Displacement\MaterialWaveDisplacement.sdsl.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Effects\MyGameGlobalData.sdsl.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Effects\MyUtils.sdsl.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Effects\Texture\ComputeWaveNormal.sdsl.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Effects\Texture\ComputeWaveNormalPanningUv.sdsl.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Effects\Texture\MaterialWaveSurfaceNormal.sdsl.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Effects\Water\WaterColorTransparency.sdsl.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Effects\Displacement\ComputeGerstnerWave.sdsl">
+      <LastGenOutput>ComputeGerstnerWave.sdsl.cs</LastGenOutput>
+    </None>
+    <None Update="Effects\Displacement\ComputeWaveDisplacement.sdsl">
+      <LastGenOutput>ComputeWaveDisplacement.sdsl.cs</LastGenOutput>
+    </None>
+    <None Update="Effects\Displacement\MaterialWaveDisplacement.sdsl">
+      <LastGenOutput>MaterialWaveDisplacement.sdsl.cs</LastGenOutput>
+    </None>
+    <None Update="Effects\MyGameGlobalData.sdsl">
+      <LastGenOutput>MyGameGlobalData.sdsl.cs</LastGenOutput>
+    </None>
+    <None Update="Effects\MyUtils.sdsl">
+      <LastGenOutput>MyUtils.sdsl.cs</LastGenOutput>
+    </None>
+    <None Update="Effects\Texture\ComputeWaveNormal.sdsl">
+      <LastGenOutput>ComputeWaveNormal.sdsl.cs</LastGenOutput>
+    </None>
+    <None Update="Effects\Texture\ComputeWaveNormalPanningUv.sdsl">
+      <LastGenOutput>ComputeWaveNormalPanningUv.sdsl.cs</LastGenOutput>
+    </None>
+    <None Update="Effects\Texture\MaterialWaveSurfaceNormal.sdsl">
+      <LastGenOutput>MaterialWaveSurfaceNormal.sdsl.cs</LastGenOutput>
+    </None>
+    <None Update="Effects\Water\WaterColorTransparency.sdsl">
+      <LastGenOutput>WaterColorTransparency.sdsl.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+</Project>

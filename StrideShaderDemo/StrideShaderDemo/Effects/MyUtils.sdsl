@@ -1,0 +1,32 @@
+﻿shader MyUtils
+{
+    float2 GetPanningTextureMapUv(float3 vertWorldPos, float texMapWorldLength, float2 uvOffsetDirection, float uvSpeed)
+    {
+        float2 texMapUvTimeOffset = uvOffsetDirection * Global.Time * uvSpeed;
+        float2 texMapUvOffset = (vertWorldPos.xz  / texMapWorldLength) - texMapUvTimeOffset;  // Subtract from offset to appear to move the right direction
+        return texMapUvOffset;
+    }
+
+    float3 ReconstructNormalFromXY(float3 normal, float xyScale)
+    {
+        // Normal in *tangent* space.
+        // When normal is (0, 0, 1), then the normal is facing directly out of the mesh,
+        // therefore, xyScale = 0 always makes the mesh smooth (ie. no 'bump'),
+        // xyScale > 1 increases the apparent 'bumpiness'.
+
+        //if (TScaleAndBias)
+        {
+            normal = (2.0f * normal) - 1.0f;    // Gets values in [-1...1] range.
+        }
+
+        normal.xy *= xyScale;
+
+        // Stride removes z-component due to compression, so reconstruct here
+        // If Z is calculated from XY do it here
+        //if (TIsNormalXY1)
+        {
+            normal.z = sqrt(max(0, 1.0f - (normal.x * normal.x + normal.y * normal.y)));
+        }
+        return normal;
+    }
+};

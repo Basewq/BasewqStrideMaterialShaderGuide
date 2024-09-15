@@ -2,9 +2,7 @@
 
 This repository contains a "Effects and Shaders" Companion Guide and demo project with a water shader that shows various shader techniques used to design the water shader.
 
-<video controls>
-  <source src="images/water_demo.mp4" type="video/mp4">
-</video>
+https://github.com/user-attachments/assets/6ed86fb5-36d0-4879-a044-73ffa332f553
 
 Open the guide.md file at sits next to this file, or [click here to read the guide](guide.md) if viewing this on GitHub.
 

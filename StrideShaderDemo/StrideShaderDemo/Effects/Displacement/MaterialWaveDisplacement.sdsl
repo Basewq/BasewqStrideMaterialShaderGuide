@@ -33,6 +33,8 @@
             streams.Position.xyz += finalPositionOffset;
             streams.meshNormal = finalWaveNormal;
             streams.meshTangent = float4(finalWaveTangent, 0);
+
+            streams.WaveDisplacementPositionOffset = finalPositionOffset;   // Store the final position offset MaterialWaveSurfaceNormal shader can read
         }
     }
 };

@@ -1,18 +1,28 @@
-﻿shader MaterialWaveSurfaceNormal : ComputeWaveNormal, IMaterialSurfacePixel,
-    PositionStream4, NormalStream, Transformation
+﻿shader MaterialWaveSurfaceNormal : ComputeWaveNormal, ComputeWaveDisplacement, IMaterialSurfacePixel,
+    PositionStream4, NormalStream
 {
+    cbuffer PerMaterial
+    {
+        stage float PositionDisplacementInfluence = 0.25f;
+    }
+
     compose ComputeWaveNormal SurfaceNormalFunctions[];
 
     override void Compute()
     {
-        var worldPos = streams.PositionWS;
+        var worldPos = streams.PositionWS.xyz;
+        // This offset makes the texture sampling closer to the expansion/contraction of the vertex position rather than the world position,
+        // ie. PositionDisplacementInfluence = 0 => Only depends on world position
+        //     PositionDisplacementInfluence = 1 => Fully aligned to the vertex position
+        var worldPosOffset = -streams.WaveDisplacementPositionOffset * PositionDisplacementInfluence;
+        worldPos += worldPosOffset;
 
         bool finalIsEnabled = false;
         float3 finalWaveNormal = 0;
 
         foreach (var surfNormFunc in SurfaceNormalFunctions)
         {
-            surfNormFunc.ComputeNormal(worldPos.xyz);
+            surfNormFunc.ComputeNormal(worldPos);
             if (streams.WaveNormalIsEnabled)
             {
                 finalIsEnabled = true;

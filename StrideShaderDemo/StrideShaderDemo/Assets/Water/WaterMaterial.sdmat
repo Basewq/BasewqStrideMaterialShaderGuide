@@ -28,6 +28,7 @@ Attributes:
                 WaveSteepness: 0.35
     Surface: !StrideShaderDemo.Rendering.MaterialWaveSurfaceNormalFeature,StrideShaderDemo
         NormalMap: e4539b63-6ec8-4fec-bdcd-ada6e83d2d99:Water/WaterNormalMap
+        PositionDisplacementInfluence: 0.25
         Normals:
             bfff0b052a76b03a33c60eca93a72f83:
                 IsEnabled: true

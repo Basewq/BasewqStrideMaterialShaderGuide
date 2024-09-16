@@ -5,6 +5,7 @@ using Stride.Rendering;
 using Stride.Rendering.Materials;
 using Stride.Shaders;
 using System.Collections.Generic;
+using Stride.Core.Annotations;
 
 namespace StrideShaderDemo.Rendering;
 
@@ -14,6 +15,13 @@ public class MaterialWaveSurfaceNormalFeature : MaterialFeature, IMaterialSurfac
 {
     [DataMember(0)]
     public Texture NormalMap { get; set; }
+
+    /// <summary>
+    /// The amount of influence the wave's position displacement (expansion/contraction) has on the sample point (the texcoord).
+    /// </summary>
+    [DataMember(5)]
+    [DataMemberRange(minimum: 0, maximum: 1, smallStep: 0.01, largeStep: 0.1, decimalPlaces: 2)]
+    public float PositionDisplacementInfluence { get; set; } = 0.25f;
 
     [DataMember(20)]
     [Display("Normals")]
@@ -31,6 +39,7 @@ public class MaterialWaveSurfaceNormalFeature : MaterialFeature, IMaterialSurfac
             {
                 context.Parameters.Set(ComputeWaveNormalPanningUvKeys.NormalMap, NormalMap);
             }
+            context.Parameters.Set(MaterialWaveSurfaceNormalKeys.PositionDisplacementInfluence, PositionDisplacementInfluence);
 
             var mixin = new ShaderMixinSource();
             mixin.Mixins.Add(new ShaderClassSource("MaterialWaveSurfaceNormal"));

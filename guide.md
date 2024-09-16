@@ -341,6 +341,7 @@ Information about each shader implementation:
 - [MaterialWaveSurfaceNormal.sdsl](StrideShaderDemo/StrideShaderDemo/Effects/Displacement/MaterialWaveSurfaceNormal.sdsl)
   - This shader just sums all the normal vectors calculated from each `ComputeWaveNormal` shader.
   - The default engine's [MaterialSurfaceNormalMap](https://github.com/stride3d/stride/blob/master/sources/engine/Stride.Rendering/Rendering/Materials/Shaders/MaterialSurfaceNormalMap.sdsl) shader states `streams.matNormal` does not need to be normalized at this step, so this has also been ignored in our shader.
+  - MaterialWaveSurfaceNormal also inherits `ComputeWaveDisplacement` so it can read the final offset (set in `streams.WaveDisplacementPositionOffset`). This shows that `stage stream` can be used to transfer data across different `MaterialFeature`s (though this should already be understood due to being able to read things like `streams.Position` on multiple `MaterialFeature`s from `PositionStream4` shader).
 
 - [ComputeWaveNormal.sdsl](StrideShaderDemo/StrideShaderDemo/Effects/Texture/ComputeWaveNormalPanningUv.sdsl)
   - This is shared by both `ComputeWaveNormalPanningUv` and `MaterialWaveSurfaceNormal` shaders. The purpose of this 'class' is so `MaterialWaveSurfaceNormal` knows what method should be called and what the output values are.

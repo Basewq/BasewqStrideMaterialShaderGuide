@@ -253,7 +253,7 @@ The shader was adapted and modified from the following sources:
 
 - The displacement function: https://developer.nvidia.com/gpugems/gpugems/part-i-natural-effects/chapter-1-effective-water-simulation-physical-models
 - Panning normal map(s): [Water Shaders series](https://www.youtube.com/playlist?list=PL78XDi0TS4lHBWhZJNOrslnkFWHwE67ak) from [Ben Cloward](https://www.youtube.com/@BenCloward)
-- Water color/edge detection: [How To Create A Water Shader // Godot 4 Tutorial](https://www.youtube.com/watch?v=7L6ZUYj1hs8) fron [StayAtHomeDev](https://www.youtube.com/@stayathomedev)
+- Water color/edge detection: [How To Create A Water Shader // Godot 4 Tutorial](https://www.youtube.com/watch?v=7L6ZUYj1hs8) from [StayAtHomeDev](https://www.youtube.com/@stayathomedev)
 
 *Note*: This project is not a one-to-one adaptation of the referenced materials.
 

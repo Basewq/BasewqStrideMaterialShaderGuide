@@ -11,11 +11,14 @@
     override void Compute()
     {
         var worldPos = streams.PositionWS.xyz;
+
+#ifdef MATERIAL_DISPLACEMENT_ENABLED
         // This offset makes the texture sampling closer to the expansion/contraction of the vertex position rather than the world position,
         // ie. PositionDisplacementInfluence = 0 => Only depends on world position
         //     PositionDisplacementInfluence = 1 => Fully aligned to the vertex position
         var worldPosOffset = -streams.WaveDisplacementPositionOffset * PositionDisplacementInfluence;
         worldPos += worldPosOffset;
+#endif
 
         bool finalIsEnabled = false;
         float3 finalWaveNormal = 0;

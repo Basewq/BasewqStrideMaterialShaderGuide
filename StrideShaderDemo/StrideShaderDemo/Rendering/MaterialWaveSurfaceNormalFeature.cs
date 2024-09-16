@@ -29,20 +29,23 @@ public class MaterialWaveSurfaceNormalFeature : MaterialFeature, IMaterialSurfac
 
     public override void GenerateShader(MaterialGeneratorContext context)
     {
-        if (Normals?.Count > 0)
+        if (NormalMap is not null && Normals?.Count > 0)
         {
             // Inform the context that we are using matNormal (from the MaterialSurfaceNormalMap shader)
             context.UseStreamWithCustomBlend(MaterialShaderStage.Pixel, "matNormal", new ShaderClassSource("MaterialStreamNormalBlend"));
-            context.Parameters.Set(MaterialKeys.HasNormalMap, true);   
+            context.Parameters.Set(MaterialKeys.HasNormalMap, true);
 
-            if (NormalMap is not null)
-            {
-                context.Parameters.Set(ComputeWaveNormalPanningUvKeys.NormalMap, NormalMap);
-            }
+            context.Parameters.Set(ComputeWaveNormalPanningUvKeys.NormalMap, NormalMap);
             context.Parameters.Set(MaterialWaveSurfaceNormalKeys.PositionDisplacementInfluence, PositionDisplacementInfluence);
 
             var mixin = new ShaderMixinSource();
             mixin.Mixins.Add(new ShaderClassSource("MaterialWaveSurfaceNormal"));
+
+            bool isDisplacementEnabled = context.Parameters.Get(MaterialWaveDisplacementFeature.IsFeatureEnabled);
+            if (isDisplacementEnabled)
+            {
+                mixin.AddMacro("MATERIAL_DISPLACEMENT_ENABLED", 1);
+            }
 
             const string ComposeShaderArrayPropertyName = "SurfaceNormalFunctions";     // Name of property array in MaterialWaveSurfaceNormal.sdsl
             foreach (var norm in Normals)
